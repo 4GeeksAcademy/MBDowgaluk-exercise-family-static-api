@@ -11,25 +11,53 @@ from random import randint
 class FamilyStructure:
     def __init__(self, last_name):
         self.last_name = last_name
-
-        # example list of members
-        self._members = []
+        self._members =   [{'id': self._generate_id(),
+                            'first_name': 'John',
+                            'last_name': last_name,
+                            'age': 33,
+                            'lucky_numbers': [7, 13, 22]},
+                            {'id': self._generate_id(),
+                            'first_name': 'Jane',
+                            'last_name': last_name,
+                            'age': 35,
+                            'lucky_numbers': [10, 14, 3]},
+                            {'id': self._generate_id(),
+                            'first_name': 'Jimmy',
+                            'last_name': last_name,
+                            'age': 5,
+                            'lucky_numbers': [1]},] 
 
     # read-only: Use this method to generate random members ID's when adding members into the list
-    def _generateId(self):
+    def _generate_id(self):
         return randint(0, 99999999)
 
     def add_member(self, member):
-        # fill this method and update the return
-        pass
+        member['id'] = self._generate_id()
+        member['last_name'] = self.last_name
+        self._members.append(member)
 
     def delete_member(self, id):
-        # fill this method and update the return
-        pass
+        for item in self._members:
+            if item['id'] == id:
+                position = self._members.index(item)
+                del self._members[position]
+                return self._members
+        return False
 
     def get_member(self, id):
-        # fill this method and update the return
-        pass
+        for item in self._members:
+            if item['id'] == id:
+                return item
+        return False
+
+    def modify_member(self, member, id):
+        member['id'] = id
+        member['last_name'] = self.last_name
+        for item in self._members:
+            if item['id'] == id:
+                position = self._members.index(item)
+                self._members[position] = member
+        return False
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
