@@ -67,9 +67,9 @@ def handle_member(id_member):
     if request.method == 'PUT':
         data = request.json
         jackson_family.modify_member(data, id_member)
-        members = jackson_family.get_all_members()
+        member = jackson_family.get_member(id_member)
         response_body['message'] = 'Modificado'
-        response_body['results'] = members
+        response_body['results'] = member
         return response_body, 200
 
 # this only runs if `$ python src/app.py` is executed
